@@ -1,0 +1,19 @@
+.App {
+  font-family: lato;
+  text-align: center;
+}
+input {
+  height: 20px;
+  width: 340px;
+  border-color: #3db2ff;
+  border-radius: 2px;
+}
+
+table,
+th,
+td {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  border-spacing: 0.5px;
+  border: 0.1px solid black;
+  text-align: center;
+}
