@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "./styles.css";
 
 export default function App() {
@@ -168,9 +168,12 @@ export default function App() {
   const [click, setClick] = useState(false);
   const [name, setName] = useState("");
   const [search, setSearch] = useState("");
+  const [choice, setChoice] = useState([]);
+  const [length, setLength] = useState(5);
 
+  //printing a user data function
   const handleClick = (id) => {
-    setClick(true);
+    setClick(!click);
     setSearch(
       `${details[id - 1].first_name + " " + details[id - 1].last_name}`
     );
@@ -197,27 +200,43 @@ export default function App() {
 
   function handleSelect() {
     setClick(true);
+    loadData();
   }
-  
-  
+  async function loadData() {
+    if (details.length < length) {
+      return;
+    }
+    setChoice(details.slice(0, length));
+    setLength(length + 5);
+  }
+  //handling scroll
+  const handlesScroll = (e) => {
+    const bottom =
+      e.target.scrollHeight - (e.target.scrollTop) ===
+      e.target.clientHeight;
+    if (bottom) {
+      loadData();
+    }
+  };
   return (
     <div>
       <div>
         <input
           type="text"
           placeholder="Search..."
-          style={{ width: "350px" }}
+          style={{ width: "350px", display: "block" }}
           value={search}
           onClick={handleSelect}
         />
 
         {click ? (
           <select
-            size={5}
+            size={4}
             className="selection"
             style={{ width: "350px", textAlign: "center" }}
+            onScroll={handlesScroll}
           >
-            {details.map((data) => {
+            {choice.map((data) => {
               return (
                 <option onClick={() => handleClick(data.id)}>
                   {`Username${data.id}`}
@@ -229,6 +248,7 @@ export default function App() {
           ""
         )}
       </div>
+
       <br />
       <div>{name}</div>
     </div>
