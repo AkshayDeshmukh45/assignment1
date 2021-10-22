@@ -55,7 +55,7 @@ export default function App() {
   }
   //handling scroll
   const handlesScroll = (e) => {
-    const bottom = e.target.scrollHeight - Math.round(e.target.scrollTop) ===
+    const bottom = e.target.scrollHeight -(e.target.scrollTop) ===
       e.target.clientHeight;
     if (bottom) {
       loadData();
