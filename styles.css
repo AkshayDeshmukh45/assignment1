@@ -1,19 +1,27 @@
 .App {
-  font-family: lato;
+  font-family: sans-serif;
   text-align: center;
 }
-input {
-  height: 20px;
-  width: 340px;
-  border-color: #3db2ff;
-  border-radius: 2px;
+th, td {
+  font-size:16px;
+  border: 1px solid black;
+  height: 40px;
+  padding-top: 12px;
+  
 }
 
-table,
-th,
-td {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  border-spacing: 0.5px;
-  border: 0.1px solid black;
-  text-align: center;
+table {
+  width: 50%;
+  border-collapse: collapse;
+  
+}
+input{
+  height: 25px;
+
+}
+.selection{
+  height: 100px;
+  overflow-y: scroll;
+  scroll-behavior: auto;
+  display: block;
 }
