@@ -1,30 +1,27 @@
 .App {
-<<<<<<< HEAD
   font-family: sans-serif;
   text-align: center;
 }
-#selected {
-  height: Auto;
-  width: 350px;
-  border-color: aqua;
-=======
-  font-family: lato;
-  text-align: center;
-}
-input {
-  color: black;
-  height: 20px;
-  width: 350px;
-  border-color: #3db2ff;
-  border-radius: 2px;
+th, td {
+  font-size:16px;
+  border: 1px solid black;
+  height: 40px;
+  padding-top: 12px;
+  
 }
 
-table,
-th,
-td {
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  border-spacing: 0.5px;
-  border: 0.1px solid black;
-  text-align: center;
->>>>>>> 8ae867e (trainee assignment1)
+table {
+  width: 50%;
+  border-collapse: collapse;
+  
+}
+input{
+  height: 25px;
+
+}
+.selection{
+  height: 100px;
+  overflow-y: scroll;
+  scroll-behavior: auto;
+  display: block;
 }
