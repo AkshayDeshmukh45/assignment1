@@ -51,12 +51,12 @@ export default function App() {
       return;
     }
     setChoice(details.slice(0, length));
-    setLength(length + 5);
+    setLength(length + 3);
   }
   //handling scroll
   const handlesScroll = (e) => {
-    const bottom = e.target.scrollHeight -(e.target.scrollTop) ===
-      e.target.clientHeight;
+    const bottom =
+      e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
     if (bottom) {
       loadData();
     }
@@ -67,7 +67,7 @@ export default function App() {
         <input
           type="text"
           placeholder="Search..."
-          style={{ width: "350px", display: "block"}}
+          style={{ width: "370px", display: "block" }}
           value={search}
           onClick={handleSelect}
         />
@@ -76,7 +76,7 @@ export default function App() {
           <select
             size={5}
             className="selection"
-            style={{ width: "350px", textAlign: "center" }}
+            style={{ width: "375px", textAlign: "center" }}
             onScroll={handlesScroll}
           >
             {choice.map((data) => {
