@@ -51,7 +51,7 @@ export default function App() {
       return;
     }
     setChoice(details.slice(0, length));
-    setLength(length + 3);
+    setLength(length + 5);
   }
   //handling scroll
   const handlesScroll = (e) => {
