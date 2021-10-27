@@ -7,21 +7,19 @@ th, td {
   border: 1px solid black;
   height: 40px;
   padding-top: 12px;
-  
 }
 
 table {
-  width: 50%;
   border-collapse: collapse;
-  
 }
 input{
   height: 25px;
-
-}
-.selection{
-  height: 100px;
-  overflow-y: scroll;
-  scroll-behavior: auto;
+  border: 1px solid black;
   display: block;
+  outline: none;
+}
+
+select{
+  display:block;
+  scroll-behavior: smooth;
 }
