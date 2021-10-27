@@ -10,16 +10,21 @@ export default function App() {
   const [choice, setChoice] = useState([]);
   const [length, setLength] = useState(5);
 
+  let page=0;
+  let size= 1000;
+
+//fetching data from api call
   useEffect(() => {
     const getData = async () => {
       const result = await axios.get(
-        "https://api.instantwebtools.net/v1/passenger?page=0&size=10"
+        `https://api.instantwebtools.net/v1/passenger?page=${page}&size=${size}`
       );
       const data = await result;
       setDetails(data.data.data);
     };
     getData();
-  }, []);
+  }, [page,size]);
+  
   //printing a user data function
   const handleClick = (data) => {
     setClick(!click);
@@ -32,6 +37,7 @@ export default function App() {
         <th>Trips</th>
         <th>Country</th>
 
+    //returning data on page
         <tr>
           <td>{data._id}</td>
           <td>{data.name}</td>
@@ -41,11 +47,13 @@ export default function App() {
       </table>
     );
   };
-
+  //handling selector
   function handleSelect() {
     setClick(true);
     loadData();
   }
+//function for loading data
+
   async function loadData() {
     if (details.length < length) {
       return;
@@ -53,6 +61,7 @@ export default function App() {
     setChoice(details.slice(0, length));
     setLength(length + 5);
   }
+
   //handling scroll
   const handlesScroll = (e) => {
     const bottom =
