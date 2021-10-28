@@ -1,31 +1,36 @@
-import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./styles.css";
+import { useEffect, useState } from "react";
 
-export default function App() {
+const PAGE_NUMBER = 1;
+function New() {
+  const [state, setState] = useState([]);
+  const [page, setPage] = useState(PAGE_NUMBER);
   const [click, setClick] = useState(false);
-  const [details, setDetails] = useState([]);
-  const [name, setName] = useState("");
   const [search, setSearch] = useState("");
-  const [choice, setChoice] = useState([]);
-  const [length, setLength] = useState(5);
+  const [name, setName] = useState("");
 
-  let page=0;
-  let size= 1000;
-
-//fetching data from api call
+  //fetching api here
   useEffect(() => {
     const getData = async () => {
       const result = await axios.get(
-        `https://api.instantwebtools.net/v1/passenger?page=${page}&size=${size}`
+        `https://api.instantwebtools.net/v1/passenger?page=${page}&size=12`
       );
-      const data = await result;
-      setDetails(data.data.data);
+      const data = result;
+      console.log("data",data)
+      setState([...state, ...data.data.data]);
     };
     getData();
-  }, [page,size]);
-  
-  //printing a user data function
+  }, [page]);
+
+  //handling scroll
+  function handleScroll(e) {
+    setPage(page + 1);
+  }
+
+  const handleSelect = () => {
+    setClick(true);
+  };
+  //returning data from api here
   const handleClick = (data) => {
     setClick(!click);
     setSearch(data.name);
@@ -33,11 +38,8 @@ export default function App() {
       <table style={{ width: "350px" }}>
         <th>ID</th>
         <th>NAME</th>
-
         <th>Trips</th>
         <th>Country</th>
-
-    //returning data on page
         <tr>
           <td>{data._id}</td>
           <td>{data.name}</td>
@@ -47,60 +49,40 @@ export default function App() {
       </table>
     );
   };
-  //handling selector
-  function handleSelect() {
-    setClick(true);
-    loadData();
-  }
-//function for loading data
-
-  async function loadData() {
-    if (details.length < length) {
-      return;
-    }
-    setChoice(details.slice(0, length));
-    setLength(length + 5);
-  }
-
-  //handling scroll
-  const handlesScroll = (e) => {
-    const bottom =
-      e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
-    if (bottom) {
-      loadData();
-    }
-  };
+  //returning a data
   return (
-    <div className="App">
-      <div>
-        <input
-          type="text"
-          placeholder="Search..."
-          style={{ width: "370px", display: "block" }}
-          value={search}
-          onClick={handleSelect}
-        />
+    <div>
+      <input
+        type="text"
+        placeholder="Search..."
+        style={{ width: "350px", display: "block" }}
+        value={search}
+        onClick={handleSelect}
+      />
 
-        {click ? (
-          <select
-            size={5}
-            className="selection"
-            style={{ width: "375px", textAlign: "center" }}
-            onScroll={handlesScroll}
-          >
-            {choice.map((data) => {
-              return (
-                <option onClick={() => handleClick(data)}>{data.name}</option>
-              );
-            })}
-          </select>
-        ) : (
-          ""
-        )}
-      </div>
-
-      <br />
-      <div>{name}</div>
+      {click ? (
+        <select
+          size={10}
+          className="selection"
+          style={{ width: "350px", textAlign: "center" }}
+          onScroll={(e) => handleScroll(e)}
+        >
+          {state.map((data) => {
+            return (
+              <>
+                <option key={data.id} onClick={() => handleClick(data)}>
+                  {data.name}
+                </option>
+              </>
+            );
+          })}
+        </select>
+      ) : (
+        ""
+      )}
+      {name}
     </div>
   );
 }
+
+export default New;
